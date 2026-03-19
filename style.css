@@ -16,6 +16,7 @@
     height: 7vh;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
     width: 70%;
+    margin:10px
 
 }
 .submit{
@@ -23,25 +24,28 @@
      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
      border-radius: 50px;
      background-color:  rgb(255, 221, 221);
+     margin-right: 10px;
 }
 /* section1 */
 .categories{
     display: flex;
     justify-content: space-between;
-    margin-top: 2vw;
+
     margin-left: 5vw;
     margin-right: 10vw;
-    height: 5vh;
     margin-bottom: 4vw;
 
 }
 .h3{
-    font-weight: 300;
+    font-weight: 200;
+    border: none;
+    font-size: 13px;
+    margin-top: 20px;
 }
 .arrow1{
     border: none;
     background-color:  rgb(255, 233, 233);
-    font-size: 15px;
+    font-size: 10px;
 
 }
 
@@ -50,11 +54,12 @@
 
 .menu-container{
    display: flex;
-    gap: 50px;
+    gap: 30px;
     margin-top: 1vw;
     margin-left: 10vw;
     margin-right: 10vw;
     height: 10vh;
+    
 
 }
 .menu-card img{
@@ -107,6 +112,59 @@
 .btn{
     background-color: rgb(255, 221, 221); 
     border: none;
+}
+
+@media(max-width:200px) {
+
+}
+/* trend card */
+
+.food-container{
+    display: grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap: 20px;
+    align-items: center;
+    height: auto;
+    margin-left: 20px;
+    margin-bottom: 110px;
+    margin-right: 20px;
+
+}
+.trend-card img{
+    width: 30vw;
+    height: 30vh;
+    border-radius: 20px;
+    border-color: black;
+    border: 10px;
+    object-fit: cover;
+    display: block;
+
+}
+
+/*responsive */
+
+@media ( max-width: 316px ) {
+  .menu-container{
+    gap: 10px !important;
+    margin-top: -20px;
+    height: 6vh;
+    
+    
+}
+.menu-card img{
+    width: 10vw;
+}
+.menu-card h2{
+    font-size: 10px;
+}
+.food-container{
+    grid-template-columns: 1fr 1fr !important;
+    height: auto;
+    margin-left: 30px;
+}
+.trend-card img{
+    height: 15vh;
+}
 }
 
 
