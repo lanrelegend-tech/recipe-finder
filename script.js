@@ -5,13 +5,14 @@ async function getData(query) {
     const data = await response.json();
 
      meals =data.meals || [];
-    displayMeals();   
+    displayMeals();  
+    return meals;
 } catch(error){
     console.error(error);
     return [];
 }
 }
-const formContainer =document.querySelector('.head-container ');
+const formContainer =document.querySelector('form ');
 const productContainer=document.getElementsByClassName('food-Container')[0];
 const displayMeals=()=> {
 productContainer.innerHTML='';
@@ -53,9 +54,9 @@ productContainer.appendChild(fragment);
 formContainer.addEventListener('submit',async(e) =>{
     e.preventDefault();
     let formData =new FormData(formContainer)
-    let searchInput = formData.get('searchinput').trim();
+    const searchInput = document.querySelector('input[name="searchinput"]');
     if (!searchInput)return;
-     const searchResult = await getData('searchinput');
+     const searchResult = await getData(searchInput.value.trim());
     const meal = searchResult[0] || null;
     if (meal) {
         if (meal.strSource) {
@@ -69,3 +70,14 @@ formContainer.addEventListener('submit',async(e) =>{
 });
 
 getData('a');
+
+
+/* categories*/
+
+const categoryHeader =document.getElementById('category');
+categoryHeader.style.cursor = 'pointer';
+categoryHeader.addEventListener('click', () => {
+    const url ='https://www.themealdb.com/api/json/v1/1/categories.php';
+    window.open(url, '_blank');
+}
+);
