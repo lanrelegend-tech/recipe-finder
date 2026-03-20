@@ -1,32 +1,35 @@
 let meals =[];
 async function getData() {
-    const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?=');
+    try{
+    const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?=a');
     const data = await response.json();
 
-    meals =data.meals;
-    
-    
+    meals =data.meals || [];
+    displayMeals();   
+} catch(error){
+    console.error(error);
 }
-function displayMeals() {
+}
+
 const productContainer=document.getElementsByClassName('food-Container')[0];
+const displayMeals=()=> {
 productContainer.innerHTML='';
 let fragment = document.createDocumentFragment();
-if(meals.length > 0) {
-meals.forEach(meals =>{
+if (! Array.isArray(meals)) {
+    console.log("meal is not array:",meals)
+meals.forEach(() =>{
 const element=document.createElement('div');
 element.className='trend-card';
 
-element.innerHTML= `<img src="${meals.strMealThumb}" alt"${meals.strMeal}">
-                 <h1 class="Product name">${meals.strMeal}</h1>
-                 ` ;
+element.innerHTML= '<h1>hello<h1>';
 
 fragment.appendChild(element);
 
 });
-}
+
 productContainer.appendChild(fragment);
-        
+}    
 
     };
-    displayMeals();
+    getData();
 
