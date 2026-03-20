@@ -4,14 +4,14 @@ async function getData(query) {
     const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`);
     const data = await response.json();
 
-    return meals =data.meals || [];
+     meals =data.meals || [];
     displayMeals();   
 } catch(error){
     console.error(error);
-    return
+    return [];
 }
 }
-const formContainer =document.getElementsByClassName('head-container')[0];
+const formContainer =document.querySelector('.head-container ');
 const productContainer=document.getElementsByClassName('food-Container')[0];
 const displayMeals=()=> {
 productContainer.innerHTML='';
@@ -42,7 +42,7 @@ productContainer.appendChild(fragment);
     console.log("meals is not an array:", meals);
 }
 
-    }
+    };
 
 
     
@@ -55,7 +55,7 @@ formContainer.addEventListener('submit',async(e) =>{
     let formData =new FormData(formContainer)
     let searchInput = formData.get('searchinput').trim();
     if (!searchInput)return;
-     const searchResult = await fetchMeals('searchinput');
+     const searchResult = await getData('searchinput');
     const meal = searchResult[0] || null;
     if (meal) {
         if (meal.strSource) {
@@ -67,8 +67,5 @@ formContainer.addEventListener('submit',async(e) =>{
     alert('meal not found');
 }
 });
-(async() =>{
-    meals =await fetchMeals('a');
-    renderMeals(meal);
-})
-getData();
+
+getData('a');
