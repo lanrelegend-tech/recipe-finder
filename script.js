@@ -86,12 +86,13 @@ menuCards.forEach(card => {
     });
 }  );
 /* favorites */
+meals.forEach(meal => {
 const element = document.createElement('div');
 element.classList.add('trend-card');
 element.innerHTML = `<img src="${meal.strMealThumb}" alt="${meal.strMeal}">
                              <h2>${meal.strMeal}</h2>
                              <button class="fav-btn"><i class="fa-solid fa-heart"></i></button> `;
-
+element.style.cursor = "pointer";
 const favBtn = document.querySelector('.fav-btn');
 favBtn.addEventListener('click', (e) => {
 e.stopPropagation();
@@ -103,4 +104,5 @@ e.stopPropagation();
     } else {
         alert(`${meal.strMeal} is already in favorites!`);
     }
+});
 });
