@@ -140,7 +140,7 @@
 }
 /* trend card */
 
-.food-Container{
+#food-Container{
     display: grid;
     grid-template-columns:1fr 1fr 1fr;
     gap: 20px;

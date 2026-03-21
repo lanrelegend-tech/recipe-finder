@@ -35,6 +35,16 @@ img.addEventListener('click', () => {
         alert(`${meal.strMeal}\n\n${meal.strInstructions}`);
     }
 });
+const favBtn = element.querySelector('.fav-btn');
+favBtn.style.cursor = 'pointer';
+favBtn.addEventListener('click', (e) => {
+    console.log('meal');
+    let favorites = JSON.parse(localStorage.getItem('favorites')) || []; 
+        favorites.push(meal);
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+        alert(`${meal.strMeal} added to favorites!`);
+    
+});
 
 fragment.appendChild(element);
 
@@ -87,23 +97,4 @@ menuCards.forEach(card => {
     });
 }  );
 /* favorites */
-meals.forEach(meal => {
-const element = document.createElement('div');
-element.classList.add('trend-card');
-element.innerHTML = `<img src="${meal.strMealThumb}" alt="${meal.strMeal}" class="img">
-                             <h2>${meal.strMeal}</h2>
-                             <button class="fav-btn"><i class="fa-solid fa-heart"></i></button> `;
-                             let img = element.querySelector('.img');
-img.style.cursor = "pointer";
-const favBtn = element.querySelector('.fav-btn');
-favBtn.style.cursor = 'pointer';
-favBtn.addEventListener('click', (e) => {
-    console.log('meal', meal);
-    let favorites = JSON.parse(localStorage.getItem('favorites')) || []; 
-        favorites.push(meal);
-        localStorage.setItem('favorites', JSON.stringify(favorites));
-        alert(`${meal.strMeal} added to favorites!`);
-    
-});
 
-}); 
