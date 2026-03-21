@@ -24,6 +24,7 @@ element.className='trend-card';
 
 element.innerHTML= `<img src ="${meal.strMealThumb}" alt="${meal.strMealThumb}">
 <h1 class="productname">${meal.strMeal}</h1>
+<button class="fav-btn"><i class="fa-solid fa-heart"></i></button>
 `;
 element.style.cursor ="pointer";
 element.addEventListener('click', () => {
@@ -56,17 +57,10 @@ formContainer.addEventListener('submit',async(e) =>{
     let formData =new FormData(formContainer)
     const searchInput = document.querySelector('input[name="searchinput"]');
     if (!searchInput)return;
-     const searchResult = await getData(searchInput.value.trim());
-    const meal = searchResult[0] || null;
-    if (meal) {
-        if (meal.strSource) {
- window.open(meal.strSource, '_blank');
-    } else{
-        alert(`${meal.strMeal}\n\n${meal.strInstructions}`);
-    }
-} else {
-    alert('meal not found');
-}
+     const query = searchInput.value.trim();
+     if (!query) return;
+        await getData(query);
+     searchInput.value ='';
 });
 
 getData('a');
@@ -81,3 +75,32 @@ categoryHeader.addEventListener('click', () => {
     window.open(url, '_blank');
 }
 );
+/* menu cards */
+const menuCards = document.querySelectorAll('.menu-card');
+menuCards.forEach(card => {
+    card.style.cursor = 'pointer';
+    card.addEventListener('click', () => {
+        const mealType = card.getAttribute('data-meal');
+        const url = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${mealType}`;
+        window.open(url, '_blank');
+    });
+}  );
+/* favorites */
+const element = document.createElement('div');
+element.classList.add('trend-card');
+element.innerHTML = `<img src="${meal.strMealThumb}" alt="${meal.strMeal}">
+                             <h2>${meal.strMeal}</h2>
+                             <button class="fav-btn"><i class="fa-solid fa-heart"></i></button> `;
+
+const favBtn = document.querySelector('.fav-btn');
+favBtn.addEventListener('click', (e) => {
+e.stopPropagation();
+    let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    if (!favorites.some(fav => fav.idMeal === meals.idMeal)) {
+        favorites.push(meals);
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+        alert(`${meal.strMeal} added to favorites!`);
+    } else {
+        alert(`${meal.strMeal} is already in favorites!`);
+    }
+});
