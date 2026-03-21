@@ -1,6 +1,4 @@
-const favBtn = document.querySelector('.fav-btn');
-favBtn.addEventListener('click', (event) => {
-    event.stopPropagation(); 
+const container = document.querySelector('.favorites-Container');
     let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
     favorites.forEach(fav => {
         const element = document.createElement('div');
@@ -15,7 +13,7 @@ favBtn.addEventListener('click', (event) => {
                 alert(`${fav.strMeal}\n\n${fav.strInstructions}`);
             }
         });
-    favBtn.appendChild(element);
+    container.appendChild(element);
     });
+
     
-});

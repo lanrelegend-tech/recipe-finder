@@ -22,12 +22,13 @@ meals.forEach(meal =>{
 const element=document.createElement('div');
 element.className='trend-card';
 
-element.innerHTML= `<img src ="${meal.strMealThumb}" alt="${meal.strMealThumb}">
+element.innerHTML= `<img src ="${meal.strMealThumb}" alt="${meal.strMealThumb}"class="img">
 <h1 class="productname">${meal.strMeal}</h1>
 <button class="fav-btn"><i class="fa-solid fa-heart"></i></button>
 `;
-element.style.cursor ="pointer";
-element.addEventListener('click', () => {
+let img = element.querySelector('.img');
+img.style.cursor ="pointer";
+img.addEventListener('click', () => {
     if(meal.strSource) {
         window.open(meal.strSource, '_blank');
     } else{
@@ -89,20 +90,20 @@ menuCards.forEach(card => {
 meals.forEach(meal => {
 const element = document.createElement('div');
 element.classList.add('trend-card');
-element.innerHTML = `<img src="${meal.strMealThumb}" alt="${meal.strMeal}">
+element.innerHTML = `<img src="${meal.strMealThumb}" alt="${meal.strMeal}" class="img">
                              <h2>${meal.strMeal}</h2>
                              <button class="fav-btn"><i class="fa-solid fa-heart"></i></button> `;
-element.style.cursor = "pointer";
-const favBtn = document.querySelector('.fav-btn');
+                             let img = element.querySelector('.img');
+img.style.cursor = "pointer";
+const favBtn = element.querySelector('.fav-btn');
+favBtn.style.cursor = 'pointer';
 favBtn.addEventListener('click', (e) => {
-e.stopPropagation();
-    let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-    if (!favorites.some(fav => fav.idMeal === meals.idMeal)) {
-        favorites.push(meals);
+    console.log('meal', meal);
+    let favorites = JSON.parse(localStorage.getItem('favorites')) || []; 
+        favorites.push(meal);
         localStorage.setItem('favorites', JSON.stringify(favorites));
         alert(`${meal.strMeal} added to favorites!`);
-    } else {
-        alert(`${meal.strMeal} is already in favorites!`);
-    }
+    
 });
-});
+
+}); 

@@ -39,6 +39,13 @@
 #category {
 
 }
+.fav-btn{
+    border: none;
+    background-color: transparent;
+    font-size: 20px;
+    color: rgb(255, 128, 128);
+    cursor: pointer;
+}   
 #category:hover{
     background-color: rgba(255, 182, 238, 0.2);
     border-radius: 30px;
