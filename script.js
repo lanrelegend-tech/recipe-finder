@@ -42,8 +42,11 @@ favBtn.addEventListener('click', (e) => {
     let favorites = JSON.parse(localStorage.getItem('favorites')) || []; 
         favorites.push(meal);
         localStorage.setItem('favorites', JSON.stringify(favorites));
-        alert(`${meal.strMeal} added to favorites!`);
-    
+      if(!favorites.some(fav => fav.idMeal === meal.idMeal)){   
+        alert(`${meal.strMeal} added to favorites!`)
+}else{
+    alert('Meal is already in favorites!');
+}
 });
 
 fragment.appendChild(element);
